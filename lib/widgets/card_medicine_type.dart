@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 class MedicineTypesCard extends StatelessWidget {
-  const MedicineTypesCard({Key? key, required this.image, required this.color}) : super(key: key);
+  const MedicineTypesCard({Key? key, required this.image, required this.color, required this.text}) : super(key: key);
 final String image;
+final String text;
 final Color color;
   @override
   Widget build(BuildContext context) {
@@ -10,9 +11,11 @@ final Color color;
         borderRadius: BorderRadius.circular(15.0),
       ),elevation:7,
       color: color,
-       child:Padding(
-         padding: const EdgeInsets.all(8.0),
-         child: Image.asset(image),
+       child:Column(
+         children: [
+           Image.asset(image ,height:50,width: 100,),
+           Text(text)
+         ],
        ) ,
     );
   }

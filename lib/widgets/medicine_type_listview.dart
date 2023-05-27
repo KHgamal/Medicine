@@ -17,13 +17,30 @@ class _TypesListViewState extends State<TypesListView> {
   Widget build(BuildContext context) {
     return ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount:details.length,
+        itemCount:details.length+1,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.all(8.0),
-          child: GestureDetector(onTap: (){setState(() {
+          child: index==0?
+          Container(
+            width:90,
+            decoration: const BoxDecoration(
+              color: Colors.black12,
+                borderRadius: BorderRadius.all(Radius.circular(15))
+            ),
+            child: IconButton(onPressed: (){} , icon: Column(
+              mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+              children: const [
+                Icon(Icons.camera_alt,color: Colors.black26,),
+                Text("اضف صورة",style: TextStyle(color: Colors.black26),)
+              ],
+            ) ,),
+          )
+         :GestureDetector(onTap: (){setState(() {
       selectedIndex=index;
       categoryTapped=true;
-    });},child: MedicineTypesCard(image:details[index]['imagesList'], color: categoryTapped? (selectedIndex==index ? customColor2 :Colors.white) :Colors.white,)),
+    });},child: MedicineTypesCard(image:details[index-1]['imagesList'], color: categoryTapped?
+          (selectedIndex==index ?redColor :Colors.white) :Colors.white,
+          text:details[index-1]['name'] ,)),
         )
     );
   }

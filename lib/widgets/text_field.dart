@@ -9,13 +9,11 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      textAlign: TextAlign.end,
       inputFormatters: <TextInputFormatter>[
         filteringTextInputFormatter,
       ],
       keyboardType: keyboardType,
       validator: (value) {
-        //if password length is less than 6 print weak password
         if (value == null || value.isEmpty) {
           return 'يجب ادخال قيمة';
         }
@@ -23,7 +21,6 @@ class CustomTextField extends StatelessWidget {
       },
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: const TextStyle(fontSize: 10,fontWeight: FontWeight.bold)
       ),
     );
   }

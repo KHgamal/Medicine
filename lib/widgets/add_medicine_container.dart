@@ -9,7 +9,8 @@ final Column column;
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.black26),
+        border: Border.all(color: Colors.black12, width: 2),
+        borderRadius:const BorderRadius.all(Radius.circular(13)),
       ),
       child:column,
     );

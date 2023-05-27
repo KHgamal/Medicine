@@ -29,13 +29,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: themeColor,
         inputDecorationTheme: InputDecorationTheme(
-          hintStyle:const TextStyle(fontWeight: FontWeight.bold,fontSize:15),
+          hintStyle:const TextStyle(fontSize:15,color: Colors.black26,fontWeight: FontWeight.bold),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(13),
+            borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide( color: blueColor),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(13),
+            borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide( color: blueColor),
           ),
         )
