@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -17,7 +16,7 @@ class MedicineListContainer extends StatelessWidget {
   final String image;
   final String name;
   final String nextDose;
-  final onPressed;
+  final void Function(BuildContext)? onPressed;
   final int index;
 
   @override

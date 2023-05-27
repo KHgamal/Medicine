@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled1/constants.dart';
 
-import '../widgets/bottom_sheet.dart';
 import '../widgets/medicine_list_container.dart';
 
 class MedicinesPage extends StatefulWidget {
@@ -27,7 +26,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
           ),),
         child:
       Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
            // bottom: size.height * 0.1,
             right: 12,
             left: 12,

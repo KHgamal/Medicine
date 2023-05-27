@@ -117,7 +117,8 @@ class WelcomeScreenState extends State<WelcomeScreen> {
               children:[
                 TextButton(onPressed:() {
                   setState(() {
-                    currentPage--;print(currentPage);
+                    currentPage--;
+                    print(currentPage);
                   }
                   );
                 }, child: const Text("السابق",style: TextStyle(

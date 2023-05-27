@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'package:weekday_scroller/weekday_scroller.dart';
@@ -62,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                           }),
                           backgroundColor: Colors.transparent,
                           enableWeeknumberText: false,
-                          weekdays: ["الاثنين",'الثلاثاء','الاربعاء','الخميس','الجمعة','السبت','الاحد',],
+                          weekdays: const ["الاثنين",'الثلاثاء','الاربعاء','الخميس','الجمعة','السبت','الاحد',],
                           weekdayTextColor:Colors.white70,
 
                           digitsColor:Colors.white70,

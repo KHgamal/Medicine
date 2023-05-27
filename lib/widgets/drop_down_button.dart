@@ -26,10 +26,10 @@ class _DropDownState extends State<DropDown> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: DropdownButtonFormField(
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
         ),
         items: _createList(widget.list),
-        hint: Text(widget.initialText,style: TextStyle(fontWeight: FontWeight.bold,fontSize:10),),
+        hint: Text(widget.initialText,style: const TextStyle(fontWeight: FontWeight.bold,fontSize:10),),
         value: DropDown.selectedItem,
         validator: (value) => value == null ? 'يجب ادخال قيمة' : null,
         onChanged: (String? value) => setState(() {

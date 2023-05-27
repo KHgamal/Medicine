@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import '../pages/home.dart';
 import '../constants.dart';
-import '../pages/welcome_screen.dart';
 
-import 'pages/medicine_details.dart';
 import 'widgets/circular_navigation_bar.dart';
 
 void main() {

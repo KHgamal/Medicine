@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
       },
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(fontSize: 10,fontWeight: FontWeight.bold)
+        hintStyle: const TextStyle(fontSize: 10,fontWeight: FontWeight.bold)
       ),
     );
   }
