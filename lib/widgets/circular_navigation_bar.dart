@@ -45,8 +45,32 @@ class _CircularNavigationBarState extends State<CircularNavigationBar> {
         body: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            screens[selectedPos],
-            CircularBottomNavigation(
+            Padding(
+              padding:EdgeInsets.only(bottom:MediaQuery.of(context).viewInsets.bottom+8 ),
+              child:screens[selectedPos],
+            ),
+            Align(
+                alignment: Alignment.bottomCenter,
+                child:CircularBottomNavigation(
+                  tabItems,
+                  controller: _navigationController,
+                  selectedPos: selectedPos,
+                  barHeight: bottomNavBarHeight,
+                  barBackgroundColor: Colors.white,
+                  backgroundBoxShadow: const <BoxShadow>[
+                    BoxShadow(color: Colors.black45, blurRadius: 10.0),
+                  ],
+                  animationDuration: const Duration(milliseconds: 300),
+                  selectedCallback: (int? selectedPos) {
+                    setState(() {
+                      this.selectedPos = selectedPos ?? 0;
+                    });
+                  },
+                ), ),
+            /*SizedBox(
+              height: double.infinity,
+                child: screens[selectedPos]),*/
+           /* CircularBottomNavigation(
               tabItems,
               controller: _navigationController,
               selectedPos: selectedPos,
@@ -61,14 +85,15 @@ class _CircularNavigationBarState extends State<CircularNavigationBar> {
                   this.selectedPos = selectedPos ?? 0;
                 });
               },
-            ),
+            ),*/
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endTop ,
+       /*floatingActionButtonLocation: FloatingActionButtonLocation.endTop ,
         floatingActionButton: Padding(
           padding: const EdgeInsets.all(5.0),
-          child: FloatingActionButton.small(onPressed: ()=>modalBottomSheet(context),child: Icon(Icons.add),backgroundColor: Colors.white60,foregroundColor: customColor2,),
-        ),
+          child: FloatingActionButton.small(onPressed: ()=>modalBottomSheet(context),backgroundColor: Colors.white60,foregroundColor: customColor2,child:
+          const Icon(Icons.add),),
+        ),*/
       ),
     );
   }

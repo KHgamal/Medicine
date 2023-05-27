@@ -17,13 +17,13 @@ class _TypesListViewState extends State<TypesListView> {
   Widget build(BuildContext context) {
     return ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount:imagesList.length,
+        itemCount:details.length,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(onTap: (){setState(() {
       selectedIndex=index;
       categoryTapped=true;
-    });},child: MedicineTypesCard(image: imagesList[index], color: categoryTapped? (selectedIndex==index ? customColor2 :Colors.white) :Colors.white,)),
+    });},child: MedicineTypesCard(image:details[index]['imagesList'], color: categoryTapped? (selectedIndex==index ? customColor2 :Colors.white) :Colors.white,)),
         )
     );
   }

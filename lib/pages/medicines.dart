@@ -4,9 +4,14 @@ import 'package:untitled1/constants.dart';
 import '../widgets/bottom_sheet.dart';
 import '../widgets/medicine_list_container.dart';
 
-class MedicinesPage extends StatelessWidget {
+class MedicinesPage extends StatefulWidget {
   const MedicinesPage({super.key});
 
+  @override
+  State<MedicinesPage> createState() => _MedicinesPageState();
+}
+
+class _MedicinesPageState extends State<MedicinesPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -30,18 +35,27 @@ class MedicinesPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-              ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) {
-                  return MedicineListContainer(
-                    size: size,
-                    image: imagesList[index],
-                    name: name[index],
-                    nextDose: nextDose[index],
-                  );
-                },
-                itemCount: imagesList.length,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return MedicineListContainer(
+                      index: index,
+                      size: size,
+                      image: details[index]['imagesList'],
+                      name: details[index]['name'],
+                      nextDose:details[index]['nextDose'], onPressed:(context) {
+                      setState(() {
+                        details.removeAt(index);
+                      });
+
+                    }
+                    );
+                  },
+                  itemCount: details.length,
+                ),
               ),
 
               ],

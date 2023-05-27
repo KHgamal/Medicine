@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'package:weekday_scroller/weekday_scroller.dart';
@@ -18,84 +19,83 @@ class _HomePageState extends State<HomePage> {
 
     var size = MediaQuery.of(context).size;
     double bottomNavBarHeight = size.height * 0.1;
-    return SingleChildScrollView(
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [customColor1,customColor2,customColor3, customColor5],
-          ),),
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.22,
-              width: size.width,
-              child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children:const[
-                              Text(
-                              '  تذكيرك اليومي بالدواء',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            /*Image.asset(
-                              'assets/logo.png',
-                              height: size.height * 0.15,
-                            ),*/
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                padding:const EdgeInsets.all(16),
+                color: blueColor,
+                child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children:[
+                           Column(
+                             crossAxisAlignment: CrossAxisAlignment.start,
+                             children:const [
+                               Text(
+                                 'تذكيرك اليومي بالدواء',
+                                 style: TextStyle(
+                                   color: Colors.white,
+                                   fontSize: 28,
+                                   fontWeight: FontWeight.bold,
+                                 ),
+                               ),
+                               Text(
+                                 '22 مايو 2023',
+                                 style: TextStyle(
+                                   color: Colors.white70,
+                                   fontSize:23,
+                                   //fontWeight: FontWeight.bold,
+                                 ),
+                               ),
+                             ],
+                           ),
                           ],
                         ),
-                      ),
-                       SizedBox(
-                        height: size.height*0.02,
-                      ),
-                      WeekdayScroller(
-                        selectedDay: selectedDay,
-                        changeDay: (value) => setState(() {
-                          selectedDay = value;
-                        }),
-                        backgroundColor: customColor1.withOpacity(0),
-                        enableWeeknumberText: false,
-                        weekdayTextColor:Colors.white,
-                        digitsColor:Colors.white70,
-                        selectedDigitColor:customColor1,
-                        selectedBackgroundColor:Colors.white,
-                      ),
-                    ],
-                  ),
-                ),
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: bottomNavBarHeight,
-                right: 12,
-                left: 12,
+                        WeekdayScroller(
+                          selectedDay: selectedDay,
+                          changeDay: (value) => setState(() {
+                            selectedDay = value;
+                          }),
+                          backgroundColor: Colors.transparent,
+                          enableWeeknumberText: false,
+                          weekdays: ["الاثنين",'الثلاثاء','الاربعاء','الخميس','الجمعة','السبت','الاحد',],
+                          weekdayTextColor:Colors.white70,
+
+                          digitsColor:Colors.white70,
+
+                          selectedDigitColor:blueColor,
+
+                          selectedBackgroundColor:Colors.white,
+                        ),
+                      ],
+                    ),
               ),
-              child: SizedBox(
-                height: size.height * 0.65,
+              SizedBox(
                 child: ListView.builder(
-                  scrollDirection: Axis.vertical,
+                  padding:const EdgeInsets.all(12) ,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return MedicineListContainer(
-                      size: size,
-                      image: imagesList[index],
-                      name: name[index],
-                      nextDose: nextDose[index],
+                    return Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: MedicineListContainer(
+                        size: size,
+                        image: details[index]['imagesList'],
+                        name: details[index]['name'],
+                        nextDose:details[index]['nextDose'], onPressed:(context)=>setState(() {
+                        details.removeAt(index);
+                      }), index: index,
+                      ),
                     );
                   },
-                  itemCount: imagesList.length,
+                  itemCount:details.length,
                 ),
               ),
-
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

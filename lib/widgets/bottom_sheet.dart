@@ -11,7 +11,6 @@ final formKey = GlobalKey<FormState>();
 void modalBottomSheet(context){
   var size=MediaQuery.of(context).size;
   showModalBottomSheet(
-    backgroundColor: Colors.white70,
       context: context,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadiusDirectional.only(
         topEnd: Radius.circular(25),
