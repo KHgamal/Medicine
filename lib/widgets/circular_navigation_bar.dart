@@ -4,7 +4,7 @@ import 'package:circular_bottom_navigation/tab_item.dart';
 import '../constants.dart';
 
 import '../pages/home.dart';
-import '../pages/medicines.dart';
+import '../pages/all_medicines.dart';
 import '../pages/notifications.dart';
 import 'bottom_sheet.dart';
 
