@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
 
-import 'pages/welcome_screen.dart';
 import 'widgets/circular_navigation_bar.dart';
 
 void main() {

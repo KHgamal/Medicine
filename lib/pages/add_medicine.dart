@@ -171,21 +171,21 @@ class _AddMedicineState extends State<AddMedicine> {
 
                                ],
                              ),
-                             SizedBox(
+                             const SizedBox(
                                height:15 ,
                              ),
                              Row(
                                children: [
                                  Text("ذكرني قبل : ",style: Theme.of(context).textTheme.titleLarge),
-                                 SizedBox(
+                                 const SizedBox(
                                    height: 50,
                                      width:100,
-                                     child: const DropDown(initialText:'يومين', list: ["يوم","يومين","٣ أيام","٤ أيام","٥ أيام","٦ أيام","أسبوع"],))
+                                     child: DropDown(initialText:'يومين', list: ["يوم","يومين","٣ أيام","٤ أيام","٥ أيام","٦ أيام","أسبوع"],))
                                ],
                              ),
                            ],
                           ),
-                        ): SizedBox()
+                        ): const SizedBox()
                       ]
                     )),
 

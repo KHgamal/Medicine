@@ -48,7 +48,7 @@ class _CircularNavigationBarState extends State<CircularNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    //var size = MediaQuery.of(context).size;
     //double bottomNavBarHeight = size.height * 0.1;
     return Scaffold(
       body:SafeArea(
