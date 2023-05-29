@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 class AddMedicineContainer extends StatelessWidget {
-  const AddMedicineContainer({Key? key, required this.column}) : super(key: key);
-final Column column;
+  const AddMedicineContainer({Key? key, required this.child}) : super(key: key);
+final Widget child;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -9,10 +10,10 @@ final Column column;
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.black12, width: 2),
+        border: Border.all(color:Colors.black38, width: 2),
         borderRadius:const BorderRadius.all(Radius.circular(13)),
       ),
-      child:column,
+      child:child,
     );
   }
 }

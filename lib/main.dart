@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: themeColor,
         inputDecorationTheme: InputDecorationTheme(
+          contentPadding:const EdgeInsets.only(right: 8),
           hintStyle:const TextStyle(fontSize:15,color: Colors.black26,fontWeight: FontWeight.bold),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),

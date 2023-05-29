@@ -39,7 +39,7 @@ class _TypesListViewState extends State<TypesListView> {
       selectedIndex=index;
       categoryTapped=true;
     });},child: MedicineTypesCard(image:details[index-1]['imagesList'], color: categoryTapped?
-          (selectedIndex==index ?redColor :Colors.white) :Colors.white,
+          (selectedIndex==index ?blueColor :Colors.white) :Colors.white,
           text:details[index-1]['name'] ,)),
         )
     );
