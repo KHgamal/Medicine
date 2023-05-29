@@ -22,45 +22,46 @@ class _MedicinesPageState extends State<MedicinesPage> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [customColor1,customColor2,customColor3, customColor5],
-          ),),
-        child:
-      Padding(
+            colors: [customColor1, customColor2, customColor3, customColor5],
+          ),
+        ),
+        child: Padding(
           padding: const EdgeInsets.only(
-           // bottom: size.height * 0.1,
+            // bottom: size.height * 0.1,
             right: 12,
             left: 12,
           ),
           child: SingleChildScrollView(
             child: Column(
               children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return MedicineListContainer(
-                      index: index,
-                      size: size,
-                      image: details[index]['imagesList'],
-                      name: details[index]['name'],
-                      nextDose:details[index]['nextDose'], onPressed:(context) {
-                      setState(() {
-                        details.removeAt(index);
-                      });
-
-                    }
-                    );
-                  },
-                  itemCount: details.length,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return MedicineListContainer(
+                        index: index,
+                        size: size,
+                        image: details[index]['imagesList'],
+                        name: details[index]['name'],
+                        nextDose: details[index]['nextDose'],
+                        onPressed: (context) {
+                          setState(() {
+                            details.removeAt(index);
+                          });
+                        },
+                        concentration: details[index]['concentration'],
+                        firstDose: details[index]['first dose'],
+                        secondDose: details[index]['second dose'],
+                      );
+                    },
+                    itemCount: details.length,
+                  ),
                 ),
-              ),
-
               ],
             ),
           ),
-
         ),
       ),
     );

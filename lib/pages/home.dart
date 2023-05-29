@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import '../constants.dart';
 import 'package:weekday_scroller/weekday_scroller.dart';
 
@@ -13,69 +15,76 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DateTime selectedDay = DateTime.now();
+  
   @override
   Widget build(BuildContext context) {
-
     var size = MediaQuery.of(context).size;
-    double bottomNavBarHeight = size.height * 0.1;
+     initializeDateFormatting();
+    String date = DateFormat.yMMMMd("ar_QA").format(DateTime.now());
+    //double bottomNavBarHeight = size.height * 0.1;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                padding:const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 color: blueColor,
                 child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
-                        Row(
-                          children:[
-                           Column(
-                             crossAxisAlignment: CrossAxisAlignment.start,
-                             children:const [
-                               Text(
-                                 'تذكيرك اليومي بالدواء',
-                                 style: TextStyle(
-                                   color: Colors.white,
-                                   fontSize: 28,
-                                   fontWeight: FontWeight.bold,
-                                 ),
-                               ),
-                               Text(
-                                 '22 مايو 2023',
-                                 style: TextStyle(
-                                   color: Colors.white70,
-                                   fontSize:23,
-                                   //fontWeight: FontWeight.bold,
-                                 ),
-                               ),
-                             ],
-                           ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'تذكيرك اليومي بالدواء',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              date,
+                              style: TextStyle(
+                                color: redColor,
+                                fontSize: 23,
+                                //fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
-                        ),
-                        WeekdayScroller(
-                          selectedDay: selectedDay,
-                          changeDay: (value) => setState(() {
-                            selectedDay = value;
-                          }),
-                          backgroundColor: Colors.transparent,
-                          enableWeeknumberText: false,
-                          weekdays: const ["الاثنين",'الثلاثاء','الاربعاء','الخميس','الجمعة','السبت','الاحد',],
-                          weekdayTextColor:Colors.white70,
-
-                          digitsColor:Colors.white70,
-
-                          selectedDigitColor:blueColor,
-
-                          selectedBackgroundColor:Colors.white,
                         ),
                       ],
                     ),
+                    WeekdayScroller(
+                      selectedDay: selectedDay,
+                      changeDay: (value) => setState(() {
+                        selectedDay = value;
+                      }),
+                      backgroundColor: Colors.transparent,
+                      enableWeeknumberText: false,
+                      weekdays: const [
+                        "الاثنين",
+                        'الثلاثاء',
+                        'الاربعاء',
+                        'الخميس',
+                        'الجمعة',
+                        'السبت',
+                        'الاحد',
+                      ],
+                      weekdayTextColor: Colors.white70,
+                      digitsColor: Colors.white70,
+                      selectedDigitColor: blueColor,
+                      selectedBackgroundColor: Colors.white,
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 child: ListView.builder(
-                  padding:const EdgeInsets.all(12) ,
+                  padding: const EdgeInsets.all(12),
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
@@ -84,13 +93,18 @@ class _HomePageState extends State<HomePage> {
                         size: size,
                         image: details[index]['imagesList'],
                         name: details[index]['name'],
-                        nextDose:details[index]['nextDose'], onPressed:(context)=>setState(() {
-                        details.removeAt(index);
-                      }), index: index,
+                        nextDose: details[index]['nextDose'],
+                        onPressed: (context) => setState(() {
+                          details.removeAt(index);
+                        }),
+                        index: index,
+                        concentration: details[index]['concentration'],
+                        firstDose: details[index]['first dose'],
+                        secondDose: details[index]['second dose'],
                       ),
                     );
                   },
-                  itemCount:details.length,
+                  itemCount: details.length,
                 ),
               ),
             ],

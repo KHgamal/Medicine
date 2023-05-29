@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
+import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
+import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
 import '../constants.dart';
 
 import '../pages/add_medicine.dart';
@@ -30,19 +31,58 @@ class _CircularNavigationBarState extends State<CircularNavigationBar> {
     const MedicinesPage(),
     const NotificationsPage(),
   ];
-  late CircularBottomNavigationController _navigationController;
+  final _controller = PageController();
+  /*late CircularBottomNavigationController _navigationController;
   @override
   void initState() {
     super.initState();
     _navigationController = CircularBottomNavigationController(selectedPos);
+  }*/
+  
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    double bottomNavBarHeight = size.height * 0.1;
+    //double bottomNavBarHeight = size.height * 0.1;
     return Scaffold(
-      body: Stack(
+      body:SafeArea(
+        child: PageView(
+          controller: _controller,
+          children: const [
+            HomePage(),
+          AddMedicine(),
+          MedicinesPage(),
+          NotificationsPage(),
+          ],
+        ),
+      ),
+      extendBody: true,
+      bottomNavigationBar: RollingBottomBar(
+        controller: _controller,
+        items: const [
+          RollingBottomBarItem(Icons.home, label: "رئيسيه"),
+          RollingBottomBarItem(Icons.add, label: "إضافة"),
+          RollingBottomBarItem(Icons.list, label: "دوائي"),
+          RollingBottomBarItem(Icons.notifications, label: "الأشعارات"),
+        ],
+        color:blueColor ,
+        activeItemColor: redColor,
+        enableIconRotation: true,
+        onTap: (index) {
+          _controller.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeOut,
+          );
+        },
+      ),
+      /* Stack(
         alignment: Alignment.bottomCenter,
         children: [
           SafeArea(child: screens[selectedPos]),
@@ -85,7 +125,7 @@ class _CircularNavigationBarState extends State<CircularNavigationBar> {
           ),*/
         ],
 
-      ),
+      ),*/
     );
   }
 }

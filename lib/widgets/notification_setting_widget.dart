@@ -83,8 +83,8 @@ class _NotificationsSettingsElementState
       MaterialState.focused,
     };
     if (states.any(interactiveStates.contains)) {
-      return customColor1;
+      return darkBlue;
     }
-    return customColor2;
+    return blueColor;
   }
 }
