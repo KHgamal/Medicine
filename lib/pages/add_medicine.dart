@@ -20,6 +20,13 @@ class _AddMedicineState extends State<AddMedicine> {
   TextEditingController endDate=TextEditingController();
   TextEditingController num=TextEditingController();
   TextEditingController time=TextEditingController();
+  bool isSwitched = false;
+  void toggleSwitch(bool value) {
+    isSwitched==true?isSwitched=false:isSwitched=true;
+    setState(() {
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +138,55 @@ class _AddMedicineState extends State<AddMedicine> {
                           height:80,
                           child: MedicineMeal(),
                         ),
-                      ],
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Row(
+                            children: [
+                              Text("ذكرني بشراء الدواء :",style: Theme.of(context).textTheme.titleLarge),
+                              Switch(
+                                value: isSwitched,
+                                onChanged:toggleSwitch,
+                                inactiveTrackColor:Colors.black38 ,
+                                activeTrackColor: Colors.green,
+                                activeColor: Colors.white,
+                                inactiveThumbColor:Colors.white ,
+                              ),
+                            ],
+                          ),
+                        ),
+                        isSwitched?
+                        SizedBox(
+                          width:300,
+                          child: Column(
+                           children: [
+                             Row(
+                               children: [
+                                 Text("العدد : ",style: Theme.of(context).textTheme.titleLarge),
+                                 SizedBox(
+                                   width:200,
+                                   child: CustomTextField(filteringTextInputFormatter: FilteringTextInputFormatter.allow(RegExp("[a-z A-Z 0-9 \u0621-\u064A0-9 ]")),
+                                     keyboardType:TextInputType.text,hintText:" عدد الأقراص في العلبة", controller: time, readOnly: false,
+                                   ),
+                                 ),
+
+                               ],
+                             ),
+                             SizedBox(
+                               height:15 ,
+                             ),
+                             Row(
+                               children: [
+                                 Text("ذكرني قبل : ",style: Theme.of(context).textTheme.titleLarge),
+                                 SizedBox(
+                                   height: 50,
+                                     width:100,
+                                     child: const DropDown(initialText:'يومين', list: ["يوم","يومين","٣ أيام","٤ أيام","٥ أيام","٦ أيام","أسبوع"],))
+                               ],
+                             ),
+                           ],
+                          ),
+                        ): SizedBox()
+                      ]
                     )),
 
               ],
