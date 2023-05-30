@@ -47,6 +47,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
       textDirection: TextDirection.rtl,
       child: SafeArea(
         child:Scaffold(
+          backgroundColor:Color(0xffcdecf6) ,
           body: Stack(
             children: [
               Image.asset("assets/bg.jpg",height: size.height,fit: BoxFit.fitHeight,),
@@ -59,27 +60,29 @@ class _MedicinesPageState extends State<MedicinesPage> {
                       children: [
                         Center(
                           child: Container(
-                            width: 300,
+                            padding:const EdgeInsets.all(8),
                             decoration:const BoxDecoration(
-                                color: Colors.white54,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.all(Radius.circular(20))
                             ),
                             margin:const EdgeInsets.only(top: 50),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(top:50),
-                                  child: Text(
-                                    details[index]['name'],
-                                    style: const  TextStyle(
-                                      fontSize:30,
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top:50),
+                                    child: Text(
+                                      details[index]['name'],
+                                      style: const  TextStyle(
+                                        fontSize:30,
+                                      ),
+                                      // textAlign: TextAlign.center,
                                     ),
-                                    // textAlign: TextAlign.center,
                                   ),
                                 ),
-                                Text("ملاحظات"),
-                                Text("hghghgureguygughvbhguyghgvhgguiguuigiug"),
+                                Text("ملاحظات",style: Theme.of(context).textTheme.titleLarge,),
+                                Text("عليك بإبلاغ الطبيب أو الصيدلاني عن تناولك أدويه أخرى أو مكملات غذائية أو أدويه طبيعيه."),
                               ],
                             ),
                           ),
@@ -88,7 +91,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
                             alignment:Alignment.topCenter,
                             child: CircleAvatar(
                               radius:50,
-                              backgroundColor: Colors.white54,
+                              backgroundColor: Colors.white,
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
                                 child: Image.asset(
@@ -108,81 +111,3 @@ class _MedicinesPageState extends State<MedicinesPage> {
     );
   }
 }
-/*
- Directionality(
-      textDirection: TextDirection.rtl,
-      child: SafeArea(
-        child:  Scaffold(
-          backgroundColor: Color(0xffcdecf6),
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Stack(
-              children: [
-                Center(
-                  child: Container(
-                    width: 300,
-                    decoration:const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20))
-                    ),
-                    margin:const EdgeInsets.only(top: 50),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(top:50),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(onPressed:(){
-                                if(index>0) index--;
-                                setState(() {
-                                });
-                              }, icon: const  Icon( Icons.arrow_back_ios_outlined ,
-                              color:Colors.black54 ,),
-                              ),
-                              Text(
-                                details[index]['name'],
-                                style: const  TextStyle(
-                                  fontSize:30,
-                                ),
-                                // textAlign: TextAlign.center,
-                              ),
-                              IconButton(onPressed:(){
-                                if(index<details.length-1) index++;
-                                setState(() {
-                                });
-                              }, icon: const
-                              Icon( Icons.arrow_forward_ios_outlined,color:Colors.black54)),
-                            ],
-                          ),
-                        ),
-                        Text("ملاحظات"),
-                        Text("hghghgureguygughvbhguyghgvhgguiguuigiug"),
-                      ],
-                    ),
-                  ),
-                ),
-                Align(
-                    alignment:Alignment.topCenter,
-                    child: CircleAvatar(
-                      radius:50,
-                      backgroundColor: Colors.white,
-                      child: CircleAvatar(
-                        radius:40,
-                        backgroundColor:const Color(0xffcdecf6),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Image.asset(
-                            details[index]['imagesList'],
-                          ),
-                        ),
-                      ),
-                    )),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
- */
