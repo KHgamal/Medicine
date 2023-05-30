@@ -55,7 +55,7 @@ class _CircularNavigationBarState extends State<CircularNavigationBar> {
         child: PageView(
           controller: _controller,
           children: const [
-            HomePage(),
+          HomePage(),
           AddMedicine(),
           MedicinesPage(),
           NotificationsPage(),
@@ -64,6 +64,7 @@ class _CircularNavigationBarState extends State<CircularNavigationBar> {
       ),
       extendBody: true,
       bottomNavigationBar: RollingBottomBar(
+
         controller: _controller,
         items: const [
           RollingBottomBarItem(Icons.home, label: "رئيسيه"),
@@ -71,8 +72,10 @@ class _CircularNavigationBarState extends State<CircularNavigationBar> {
           RollingBottomBarItem(Icons.list, label: "دوائي"),
           RollingBottomBarItem(Icons.notifications, label: "الأشعارات"),
         ],
+        flat: true,
         color:blueColor ,
-        activeItemColor: redColor,
+        itemColor: Colors.white,
+        activeItemColor:Colors.white,
         enableIconRotation: true,
         onTap: (index) {
           _controller.animateToPage(
