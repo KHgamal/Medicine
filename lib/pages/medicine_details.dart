@@ -44,8 +44,7 @@ class MedicineDetails extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Expanded(
-                              child: Image.asset(details[index]["imagesList"])),
+                          child: Image.asset(details[index]["imagesList"]),
                         ),
                         const SizedBox(
                           height: 20,

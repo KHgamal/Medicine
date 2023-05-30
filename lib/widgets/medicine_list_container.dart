@@ -100,9 +100,9 @@ class MedicineListContainer extends StatelessWidget {
                     const SizedBox(width:5,),
                     Column(
                       children: [
-                        DoseContainer(dose: firstDose),
+                        DoseContainer(dose: firstDose, color: blueColor, fontSize: 12,),
                         const SizedBox(height: 5,),
-                        DoseContainer(dose: secondDose)
+                        DoseContainer(dose: secondDose, color: blueColor, fontSize: 12,)
                       ],
                     ),
                   ],
@@ -117,28 +117,6 @@ class MedicineListContainer extends StatelessWidget {
 }
 
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color:blueColor,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(30),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          dose,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class IntakeContainer extends StatefulWidget {
   const IntakeContainer({

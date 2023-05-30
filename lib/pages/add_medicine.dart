@@ -30,8 +30,8 @@ class _AddMedicineState extends State<AddMedicine> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    double bottomNavBarHeight = size.height * 0.1;
+    //var size = MediaQuery.of(context).size;
+    //double bottomNavBarHeight = size.height * 0.1;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Directionality(

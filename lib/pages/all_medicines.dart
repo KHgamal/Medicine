@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:untitled1/constants.dart';
@@ -36,7 +35,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
 
   @override
   void dispose() {
-    // super.dispose();
+     super.dispose();
     // _timer.cancel();
 
   }
@@ -47,7 +46,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
       textDirection: TextDirection.rtl,
       child: SafeArea(
         child:Scaffold(
-          backgroundColor:Color(0xffcdecf6) ,
+          backgroundColor:const Color(0xffcdecf6) ,
           body: Stack(
             children: [
               Image.asset("assets/bg.jpg",height: size.height,fit: BoxFit.fitHeight,),
@@ -82,7 +81,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
                                   ),
                                 ),
                                 Text("ملاحظات",style: Theme.of(context).textTheme.titleLarge,),
-                                Text("عليك بإبلاغ الطبيب أو الصيدلاني عن تناولك أدويه أخرى أو مكملات غذائية أو أدويه طبيعيه."),
+                                const Text("عليك بإبلاغ الطبيب أو الصيدلاني عن تناولك أدويه أخرى أو مكملات غذائية أو أدويه طبيعيه."),
                               ],
                             ),
                           ),
