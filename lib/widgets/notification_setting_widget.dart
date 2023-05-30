@@ -28,7 +28,6 @@ class _NotificationsSettingsElementState
       elevation: 5,
       child: SizedBox(
         width: widget.size.width,
-        height: 100,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(

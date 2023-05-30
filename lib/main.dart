@@ -41,9 +41,7 @@ class MyApp extends StatelessWidget {
           ),
         )
       ),
-      home:const Directionality(
-          textDirection: TextDirection.rtl,
-          child:CircularNavigationBar()),
+      home:const CircularNavigationBar(),
     );
   }
 }

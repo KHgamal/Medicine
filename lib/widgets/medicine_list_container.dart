@@ -47,11 +47,10 @@ class MedicineListContainer extends StatelessWidget {
           ],
         ),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+         padding: const EdgeInsets.symmetric(horizontal: 8),
           decoration: const BoxDecoration(
             boxShadow: [
               BoxShadow(
-                //color:blueColor,
                 blurRadius: 4,
                 offset: Offset(4, 8), // Shadow position
               ),
@@ -63,92 +62,50 @@ class MedicineListContainer extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: IntakeContainer(size: size),
-              ),
-              /*const SizedBox(
-                height: 12,
-              ),*/
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
-                    children: [
-                      DoseContainer(dose: firstDose),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      DoseContainer(dose: secondDose)
-                    ],
-                  ),
-                  /*IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.edit),
-                    color: redColor,
-                  ),*/
-                  const Expanded(
-                    child: SizedBox(
-                        // width: size.width * 0.03,
-                        ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+              IntakeContainer(size: size),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      image,
+                      height: 40,
+                    ),
+                    const SizedBox(width:5,),
+                    Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           name,
                           style: const TextStyle(fontSize: 23),
                         ),
-                        const SizedBox(
-                          height: 8,
-                        ),
                         Text(
                           concentration,
                           style: TextStyle(
                             fontSize: 12,
-                            color: blueColor,
+                            color:redColor,
                           ),
                         ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'الجرعه التاليه : $nextDose ',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: darkBlue,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Icon(Icons.alarm)
-                          ],
+                        Text(
+                          'الجرعه التاليه : $nextDose ',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: darkBlue,
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    width: size.width * 0.02,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Column(
+                    const SizedBox(width:5,),
+                    Column(
                       children: [
-                        SizedBox(height: size.height * 0.03),
-                        Image.asset(
-                          image,
-                          height: 40,
-                        ),
+                        DoseContainer(dose: firstDose),
+                        const SizedBox(height: 5,),
+                        DoseContainer(dose: secondDose)
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -170,7 +127,7 @@ class DoseContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: redColor,
+        color:blueColor,
         borderRadius: const BorderRadius.all(
           Radius.circular(30),
         ),
@@ -202,41 +159,35 @@ class IntakeContainer extends StatefulWidget {
 
 class _IntakeContainerState extends State<IntakeContainer> {
   bool isChecked = false;
-  Color? fillcolor = Colors.white;
+  Color? fillColor = Colors.white;
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.white,
-      //elevation: 5,
-      child: SizedBox(
-        //width: widget.size.width,
-        //height: 100,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                  value: isChecked,
-                  onChanged: (bool? valueKey) {
-                    setState(() {
-                      isChecked = valueKey!;
-                    });
-                  }),
-              Text(
-                isChecked ? '!Intake completed' : '?Did you take your medicine',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: isChecked ? blueColor : redColor,
-                ),
-              )
-            ],
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+            isChecked ? 'تم أخذ الدواء' : 'لم يتم أخذ الدواء حتى الان',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: isChecked ? blueColor : redColor,
+            ),
           ),
+            Checkbox(
+                checkColor: Colors.white,
+                fillColor: MaterialStateProperty.resolveWith(getColor),
+                value: isChecked,
+                onChanged: (bool? valueKey) {
+                  setState(() {
+                    isChecked = valueKey!;
+                  });
+                }),
+          ],
         ),
-      ),
+        const Divider(color: Colors.black26,thickness:1.2,)
+      ],
     );
   }
 
