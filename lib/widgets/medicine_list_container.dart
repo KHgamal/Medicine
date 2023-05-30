@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../constants.dart';
 import '../pages/medicine_details.dart';
+import 'dose_container.dart';
 
 class MedicineListContainer extends StatelessWidget {
   const MedicineListContainer({
@@ -76,11 +77,11 @@ class MedicineListContainer extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      DoseContainer(dose: firstDose),
+                      DoseContainer(dose: firstDose, color: redColor, fontSize: 12,),
                       const SizedBox(
                         height: 10,
                       ),
-                      DoseContainer(dose: secondDose)
+                      DoseContainer(dose: secondDose, color: redColor, fontSize: 12,)
                     ],
                   ),
                   /*IconButton(
@@ -158,36 +159,7 @@ class MedicineListContainer extends StatelessWidget {
   }
 }
 
-class DoseContainer extends StatelessWidget {
-  const DoseContainer({
-    Key? key,
-    required this.dose,
-  }) : super(key: key);
 
-  final String dose;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: redColor,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(30),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          dose,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class IntakeContainer extends StatefulWidget {
   const IntakeContainer({
