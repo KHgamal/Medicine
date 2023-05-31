@@ -17,9 +17,8 @@ class MedicineListContainer extends StatelessWidget {
     required this.concentration,
     required this.firstDose,
     required this.secondDose,
-    required this.color,
     required this.doseContainerColor,
-    required this.doseFontColor,
+    required this.doseFontColor, this.showColor=false,
   });
   final Size size;
   final String image;
@@ -30,9 +29,9 @@ class MedicineListContainer extends StatelessWidget {
   final String secondDose;
   final void Function(BuildContext)? onPressed;
   final int index;
-  final Color color;
   final Color doseContainerColor;
   final Color doseFontColor;
+  final bool showColor;
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +54,15 @@ class MedicineListContainer extends StatelessWidget {
         ),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(
-            boxShadow: const [
+          decoration: const BoxDecoration(
+            boxShadow: [
               BoxShadow(
                 blurRadius: 4,
                 offset: Offset(4, 8), // Shadow position
               ),
             ],
-            color: color,
-            borderRadius: const BorderRadius.all(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
               Radius.circular(25),
             ),
           ),
@@ -75,9 +74,12 @@ class MedicineListContainer extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(
-                      image,
-                      height: 40,
+                    Container(
+                      color: showColor? colorsList[index % 4]:Colors.white,
+                      child: Image.asset(
+                        image,
+                        height: 40,
+                      ),
                     ),
                     const SizedBox(
                       width: 5,

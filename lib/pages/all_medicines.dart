@@ -84,6 +84,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
               return Padding(
                 padding: const EdgeInsets.all(16),
                 child: MedicineListContainer(
+                  showColor: true,
                   size: size,
                   image: details[index]['imagesList'],
                   name: details[index]['name'],
@@ -94,8 +95,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
                   index: index,
                   concentration: details[index]['concentration'],
                   firstDose: details[index]['first dose'],
-                  secondDose: details[index]['second dose'],
-                  color: colorsList[index % 4],
+                  secondDose: details[index]['second dose'], //colorsList[index % 4],
                   doseContainerColor: Colors.white,
                   doseFontColor: colorsList[index % 4],
                 ),

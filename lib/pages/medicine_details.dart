@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled1/widgets/dose_container.dart';
 import '../constants.dart';
+import '../widgets/circular_navigation_bar.dart';
 
 class MedicineDetails extends StatelessWidget {
   const MedicineDetails({Key? key, required this.index}) : super(key: key);
@@ -17,10 +18,11 @@ class MedicineDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  /*pushReplacement(
-                      MaterialPageRoute(
-                          builder: (context) => const CircularNavigationBar())),*/
+                  onPressed: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const CircularNavigationBar(),
+                    ),
+                  ),
                   icon: Icon(
                     Icons.arrow_back,
                     color: redColor,
@@ -61,13 +63,117 @@ class MedicineDetails extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  Text(
+                                  /*Text(
                                     "ملاحظات",
                                     style:
                                         Theme.of(context).textTheme.titleLarge,
+                                  ),*/
+                                  const SizedBox(
+                                    height: 25,
                                   ),
                                   const Text(
-                                      "عليك بإبلاغ الطبيب أو الصيدلاني عن تناولك أدويه أخرى أو مكملات غذائية أو أدويه طبيعيه."),
+                                    ". تجنب تناول الاطعمه التي تحتوي علي حديد قبل و بعد الجرعه بحاولي ساعتين علي الاقل .عليك بإبلاغ الطبيب أو الصيدلاني عن تناولك أدويه أخرى أو مكملات غذائية أو أدويه طبيعيه.",
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      'باقي 20 يوما علي انتهاء مده العلاج.',
+                                      style: TextStyle(
+                                        color: redColor,
+                                        fontSize: 25,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      DetailsContainer(
+                                        index: index,
+                                        text: details[index]['concentration'],
+                                        title: 'الجرعه',
+                                      ),
+                                      DetailsContainer(
+                                        index: index,
+                                        text: 'مرتين في اليوم',
+                                        title: 'عدد المرات',
+                                      ),
+                                      DetailsContainer(
+                                        index: index,
+                                        text: details[index]['first dose'],
+                                        title: 'التوقيت',
+                                      ),
+                                      Column(
+                                        children: [
+                                          Image.asset(
+                                            'assets/with.png',
+                                            width: 50,
+                                            height: 50,
+                                            color: redColor,
+                                          ),
+                                          Text(
+                                            'وسط الاكل',
+                                            style: TextStyle(color: redColor),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.edit,
+                                        color: redColor,
+                                      ),
+                                      DoseContainer(
+                                          dose: 'باقي شريطين من الدواء',
+                                          color: blueColor,
+                                          fontSize: 12,
+                                          fontColor: Colors.white),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      Icon(
+                                        Icons.edit,
+                                        color: redColor,
+                                      ),
+                                      DoseContainer(
+                                          dose:
+                                              'التذكير قبل انتهاء الدواء بيومين',
+                                          color: blueColor,
+                                          fontSize: 12,
+                                          fontColor: Colors.white),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Center(
+                                    child: ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: redColor,
+                                        foregroundColor: Colors.white,
+                                        textStyle: const TextStyle(
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                      child: const Text('تم'),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -290,6 +396,66 @@ class MedicineDetails extends StatelessWidget {
 class DetailsContainer extends StatelessWidget {
   const DetailsContainer({
     Key? key,
+    required this.index,
+    required this.text,
+    required this.title,
+  }) : super(key: key);
+
+  final int index;
+  final String text;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: TextStyle(color: blueColor, fontSize: 25),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: lightPurple,
+                blurRadius: 4,
+                offset: const Offset(2, 4), // Shadow position
+              ),
+            ],
+            borderRadius: const BorderRadius.all(
+              Radius.circular(25),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.edit,
+                  color: blueColor,
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  text,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/*class DetailsContainer extends StatelessWidget {
+  const DetailsContainer({
+    Key? key,
     required this.title,
     required this.subTitle,
     required this.icon,
@@ -357,7 +523,7 @@ class DetailsContainer extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 /* Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

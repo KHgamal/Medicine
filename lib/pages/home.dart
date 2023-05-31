@@ -104,7 +104,6 @@ class _HomePageState extends State<HomePage> {
                           concentration: details[index]['concentration'],
                           firstDose: details[index]['first dose'],
                           secondDose: details[index]['second dose'],
-                          color: Colors.white,
                           doseContainerColor: blueColor,
                           doseFontColor: Colors.white,
                         ),
