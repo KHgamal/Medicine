@@ -16,22 +16,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DateTime selectedDay = DateTime.now();
-  
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-     initializeDateFormatting();
+    initializeDateFormatting();
     String date = DateFormat.yMMMMd("ar_QA").format(DateTime.now());
     return SafeArea(
       child: Scaffold(
         body: Directionality(
-          textDirection:ui.TextDirection.rtl,
+          textDirection: ui.TextDirection.rtl,
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Container(
                   padding: const EdgeInsets.all(16),
-                  color:const Color(0xff70c5e2),
+                  color: const Color(0xff70c5e2),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SingleChildScrollView(
                   child: ListView.builder(
-                    physics:const NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(12),
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
@@ -104,6 +104,9 @@ class _HomePageState extends State<HomePage> {
                           concentration: details[index]['concentration'],
                           firstDose: details[index]['first dose'],
                           secondDose: details[index]['second dose'],
+                          color: Colors.white,
+                          doseContainerColor: blueColor,
+                          doseFontColor: Colors.white,
                         ),
                       );
                     },

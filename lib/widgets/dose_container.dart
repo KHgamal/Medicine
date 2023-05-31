@@ -4,12 +4,14 @@ class DoseContainer extends StatelessWidget {
   const DoseContainer({
     Key? key,
     required this.dose,
-    required this.color, required this.fontSize,
+    required this.color,
+    required this.fontSize, required this.fontColor,
   }) : super(key: key);
 
   final String dose;
   final Color color;
   final double fontSize;
+  final Color fontColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class DoseContainer extends StatelessWidget {
           dose,
           style: TextStyle(
             fontSize: fontSize,
-            color: Colors.white,
+            color: fontColor,
           ),
         ),
       ),

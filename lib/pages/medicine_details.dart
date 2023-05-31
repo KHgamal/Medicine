@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/widgets/circular_navigation_bar.dart';
 import 'package:untitled1/widgets/dose_container.dart';
 import '../constants.dart';
 
@@ -8,6 +7,7 @@ class MedicineDetails extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Directionality(
         textDirection: TextDirection.rtl,
@@ -17,16 +17,80 @@ class MedicineDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 IconButton(
-                  onPressed: () => Navigator.of(context).pushReplacement(
+                  onPressed: () => Navigator.of(context).pop(),
+                  /*pushReplacement(
                       MaterialPageRoute(
-                          builder: (context) => const CircularNavigationBar())),
+                          builder: (context) => const CircularNavigationBar())),*/
                   icon: Icon(
                     Icons.arrow_back,
                     color: redColor,
                     size: 30,
                   ),
                 ),
-                Container(
+                Stack(
+                  children: [
+                    Image.asset(
+                      "assets/bg.jpg",
+                      height: size.height,
+                      fit: BoxFit.fitHeight,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              margin: const EdgeInsets.only(top: 50),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 50),
+                                      child: Text(
+                                        details[index]['name'],
+                                        style: const TextStyle(
+                                          fontSize: 30,
+                                        ),
+                                        // textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    "ملاحظات",
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
+                                  ),
+                                  const Text(
+                                      "عليك بإبلاغ الطبيب أو الصيدلاني عن تناولك أدويه أخرى أو مكملات غذائية أو أدويه طبيعيه."),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundColor: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Image.asset(
+                                  details[index]['imagesList'],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                /*Container(
                   padding: const EdgeInsets.all(8),
                   margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                   decoration: const BoxDecoration(
@@ -73,7 +137,7 @@ class MedicineDetails extends StatelessWidget {
                             DoseContainer(
                               dose: details[index]['first dose'],
                               color: blueColor,
-                              fontSize: 20,
+                              fontSize: 20, fontColor: Colors.white,
                             ),
                             const SizedBox(
                               width: 25,
@@ -81,7 +145,7 @@ class MedicineDetails extends StatelessWidget {
                             DoseContainer(
                               dose: details[index]['second dose'],
                               color: redColor,
-                              fontSize: 20,
+                              fontSize: 20, fontColor: Colors.white,
                             ),
                           ],
                         ),
@@ -213,7 +277,7 @@ class MedicineDetails extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ),

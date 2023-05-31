@@ -17,6 +17,9 @@ class MedicineListContainer extends StatelessWidget {
     required this.concentration,
     required this.firstDose,
     required this.secondDose,
+    required this.color,
+    required this.doseContainerColor,
+    required this.doseFontColor,
   });
   final Size size;
   final String image;
@@ -27,6 +30,9 @@ class MedicineListContainer extends StatelessWidget {
   final String secondDose;
   final void Function(BuildContext)? onPressed;
   final int index;
+  final Color color;
+  final Color doseContainerColor;
+  final Color doseFontColor;
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +54,16 @@ class MedicineListContainer extends StatelessWidget {
           ],
         ),
         child: Container(
-         padding: const EdgeInsets.symmetric(horizontal: 8),
-          decoration: const BoxDecoration(
-            boxShadow: [
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          decoration: BoxDecoration(
+            boxShadow: const [
               BoxShadow(
                 blurRadius: 4,
                 offset: Offset(4, 8), // Shadow position
               ),
             ],
-            color: Colors.white,
-            borderRadius: BorderRadius.all(
+            color: color,
+            borderRadius: const BorderRadius.all(
               Radius.circular(25),
             ),
           ),
@@ -73,9 +79,11 @@ class MedicineListContainer extends StatelessWidget {
                       image,
                       height: 40,
                     ),
-                    const SizedBox(width:5,),
+                    const SizedBox(
+                      width: 5,
+                    ),
                     Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           name,
@@ -85,7 +93,7 @@ class MedicineListContainer extends StatelessWidget {
                           concentration,
                           style: TextStyle(
                             fontSize: 12,
-                            color:redColor,
+                            color: redColor,
                           ),
                         ),
                         Text(
@@ -97,12 +105,26 @@ class MedicineListContainer extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(width:5,),
+                    const SizedBox(
+                      width: 5,
+                    ),
                     Column(
                       children: [
-                        DoseContainer(dose: firstDose, color: blueColor, fontSize: 12,),
-                        const SizedBox(height: 5,),
-                        DoseContainer(dose: secondDose, color: blueColor, fontSize: 12,)
+                        DoseContainer(
+                          dose: firstDose,
+                          color: doseContainerColor,
+                          fontSize: 12,
+                          fontColor: doseFontColor,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        DoseContainer(
+                          dose: secondDose,
+                          color: doseContainerColor,
+                          fontSize: 12,
+                          fontColor: doseFontColor,
+                        )
                       ],
                     ),
                   ],
@@ -115,8 +137,6 @@ class MedicineListContainer extends StatelessWidget {
     );
   }
 }
-
-
 
 class IntakeContainer extends StatefulWidget {
   const IntakeContainer({
@@ -140,13 +160,13 @@ class _IntakeContainerState extends State<IntakeContainer> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-            isChecked ? 'تم أخذ الدواء' : 'لم يتم أخذ الدواء حتى الان',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: isChecked ? blueColor : redColor,
+              isChecked ? 'تم أخذ الدواء' : 'لم يتم أخذ الدواء حتى الان',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: isChecked ? blueColor : redColor,
+              ),
             ),
-          ),
             Checkbox(
                 checkColor: Colors.white,
                 fillColor: MaterialStateProperty.resolveWith(getColor),
@@ -158,7 +178,10 @@ class _IntakeContainerState extends State<IntakeContainer> {
                 }),
           ],
         ),
-        const Divider(color: Colors.black26,thickness:1.2,)
+        const Divider(
+          color: Colors.black26,
+          thickness: 1.2,
+        )
       ],
     );
   }

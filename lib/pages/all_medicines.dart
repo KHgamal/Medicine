@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:untitled1/constants.dart';
+
+import '../widgets/medicine_list_container.dart';
 
 class MedicinesPage extends StatefulWidget {
   const MedicinesPage({super.key});
@@ -35,19 +36,74 @@ class _MedicinesPageState extends State<MedicinesPage> {
 
   @override
   void dispose() {
-     super.dispose();
+    super.dispose();
     // _timer.cancel();
-
   }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: SafeArea(
-        child:Scaffold(
-          backgroundColor:const Color(0xffcdecf6) ,
-          body: Stack(
+        child: Scaffold(
+          appBar: AppBar(
+            leading: Icon(
+              Icons.sort,
+              color: blueColor,
+            ),
+            elevation: 0,
+            backgroundColor: Colors.white,
+            title: SizedBox(
+              height: 38,
+              child: TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: colorsList[0],
+                  contentPadding: const EdgeInsets.all(0),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: redColor,
+                  ),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(80),
+                      borderSide: BorderSide.none),
+                  hintStyle:
+                      TextStyle(fontSize: 14, color: Colors.grey.shade500),
+                  hintText: "Search Medicine",
+                ),
+              ),
+            ),
+          ),
+          backgroundColor: Colors.white, //Color(0xffcdecf6),
+          body: ListView.builder(
+            //physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.all(12),
+            //shrinkWrap: true,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.all(16),
+                child: MedicineListContainer(
+                  size: size,
+                  image: details[index]['imagesList'],
+                  name: details[index]['name'],
+                  nextDose: details[index]['nextDose'],
+                  onPressed: (context) => setState(() {
+                    details.removeAt(index);
+                  }),
+                  index: index,
+                  concentration: details[index]['concentration'],
+                  firstDose: details[index]['first dose'],
+                  secondDose: details[index]['second dose'],
+                  color: colorsList[index % 4],
+                  doseContainerColor: Colors.white,
+                  doseFontColor: colorsList[index % 4],
+                ),
+              );
+            },
+            itemCount: details.length,
+          ),
+          /*Stack(
             children: [
               Image.asset("assets/bg.jpg",height: size.height,fit: BoxFit.fitHeight,),
               PageView.builder(
@@ -104,7 +160,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
                 },
               ),
             ],
-          ),
+          ),*/
         ),
       ),
     );
