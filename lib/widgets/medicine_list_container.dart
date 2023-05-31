@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../constants.dart';
 import '../pages/medicine_details.dart';
+import 'dose_container.dart';
 
 class MedicineListContainer extends StatelessWidget {
   const MedicineListContainer({
@@ -12,106 +12,191 @@ class MedicineListContainer extends StatelessWidget {
     required this.image,
     required this.name,
     required this.nextDose,
+    required this.onPressed,
+    required this.index,
+    required this.concentration,
+    required this.firstDose,
+    required this.secondDose,
+    required this.doseContainerColor,
+    required this.doseFontColor, this.showColor=false,
   });
   final Size size;
   final String image;
   final String name;
+  final String concentration;
   final String nextDose;
+  final String firstDose;
+  final String secondDose;
+  final void Function(BuildContext)? onPressed;
+  final int index;
+  final Color doseContainerColor;
+  final Color doseFontColor;
+  final bool showColor;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: SizedBox(
-        //height: 120,                           //?
-        //width: size.width * 0.6,
-        child: Material(
-          color: Colors.white54,// ? the same as container so why bother
-          borderRadius: const BorderRadius.all(
-            Radius.circular(25),
-          ),
-          elevation: 5,
-          child: GestureDetector(
-            onTap: ()=>Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MedicineDetails())),
-            child: Slidable(
-              endActionPane: ActionPane(
-                motion: const ScrollMotion(),
-                children: [
-                  SlidableAction(
-                    onPressed: ((context) {}), //deleteFunction,
-                    icon: Icons.delete,
-                    backgroundColor: Colors.red.shade300,
-                    borderRadius: BorderRadius.circular(12),
-                  )
-                ],
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => MedicineDetails(
+                index: index,
+              ))),
+      child: Slidable(
+        endActionPane: ActionPane(
+          motion: const ScrollMotion(),
+          children: [
+            SlidableAction(
+              onPressed: onPressed, //deleteFunction,
+              icon: Icons.delete,
+              backgroundColor: Colors.red.shade300,
+              borderRadius: BorderRadius.circular(15),
+            )
+          ],
+        ),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 4,
+                offset: Offset(4, 8), // Shadow position
               ),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal:8),
-                decoration: const BoxDecoration(
-                  color: Colors.white38,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(25),
-                  ),
-                ),
+            ],
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(25),
+            ),
+          ),
+          child: Column(
+            children: [
+              IntakeContainer(size: size),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment:MainAxisAlignment.end,
                   children: [
-                   IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.edit),
-                      color: customColor2,
-                    ),
-                   SizedBox(
-                      width: size.width * 0.03,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: Column(
-                        crossAxisAlignment:CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            name,
-                            style: const TextStyle(fontSize: 23),
-                          ),
-                          const SizedBox(
-                            height: 18,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'الجرعه التاليه : $nextDose ',
-                                style:
-                                    TextStyle(fontSize: 18, color: customColor),
-                              ),
-                              const SizedBox(width: 5,),
-                              const Icon(Icons.alarm)
-                            ],
-                          ),
-                        ],
+                    Container(
+                      color: showColor? colorsList[index % 4]:Colors.white,
+                      child: Image.asset(
+                        image,
+                        height: 40,
                       ),
                     ),
-                    SizedBox(
-                      width: size.width * 0.02,
+                    const SizedBox(
+                      width: 5,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Column(
-                        children: [
-                          SizedBox(height: size.height*0.03),
-                          Image.asset(
-                           image,
-                           height: 40,
-                              ),
-                        ],
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name,
+                          style: const TextStyle(fontSize: 23),
+                        ),
+                        Text(
+                          concentration,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: redColor,
+                          ),
+                        ),
+                        Text(
+                          'الجرعه التاليه : $nextDose ',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: darkBlue,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Column(
+                      children: [
+                        DoseContainer(
+                          dose: firstDose,
+                          color: doseContainerColor,
+                          fontSize: 12,
+                          fontColor: doseFontColor,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        DoseContainer(
+                          dose: secondDose,
+                          color: doseContainerColor,
+                          fontSize: 12,
+                          fontColor: doseFontColor,
+                        )
+                      ],
                     ),
                   ],
                 ),
               ),
-            ),
+            ],
           ),
         ),
       ),
     );
+  }
+}
+
+class IntakeContainer extends StatefulWidget {
+  const IntakeContainer({
+    super.key,
+    required this.size,
+  });
+  final Size size;
+
+  @override
+  State<IntakeContainer> createState() => _IntakeContainerState();
+}
+
+class _IntakeContainerState extends State<IntakeContainer> {
+  bool isChecked = false;
+  Color? fillColor = Colors.white;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              isChecked ? 'تم أخذ الدواء' : 'لم يتم أخذ الدواء حتى الان',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: isChecked ? blueColor : redColor,
+              ),
+            ),
+            Checkbox(
+                checkColor: Colors.white,
+                fillColor: MaterialStateProperty.resolveWith(getColor),
+                value: isChecked,
+                onChanged: (bool? valueKey) {
+                  setState(() {
+                    isChecked = valueKey!;
+                  });
+                }),
+          ],
+        ),
+        const Divider(
+          color: Colors.black26,
+          thickness: 1.2,
+        )
+      ],
+    );
+  }
+
+  Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return isChecked ? redColor : blueColor;
+    }
+    return isChecked ? blueColor : redColor;
   }
 }

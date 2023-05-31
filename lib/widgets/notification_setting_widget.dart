@@ -28,50 +28,47 @@ class _NotificationsSettingsElementState
       elevation: 5,
       child: SizedBox(
         width: widget.size.width,
-        height: 100,
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 20,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    widget.title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Text(
-                      widget.title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    widget.subTitle,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey,
                     ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Text(
-                      widget.subTitle,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-                if (widget.checkBox)
-                  Checkbox(
-                      checkColor: customColor5,
-                      fillColor: MaterialStateProperty.resolveWith(getColor),
-                      value: isChecked,
-                      onChanged: (bool? valueKey) {
-                        setState(() {
-                          isChecked = valueKey!;
-                        });
-                      })
-              ],
-            ),
+                  ),
+                ],
+              ),
+              if (widget.checkBox)
+                Checkbox(
+                    checkColor: customColor5,
+                    fillColor: MaterialStateProperty.resolveWith(getColor),
+                    value: isChecked,
+                    onChanged: (bool? valueKey) {
+                      setState(() {
+                        isChecked = valueKey!;
+                      });
+                    })
+            ],
           ),
         ),
       ),
@@ -85,8 +82,8 @@ class _NotificationsSettingsElementState
       MaterialState.focused,
     };
     if (states.any(interactiveStates.contains)) {
-      return customColor1;
+      return darkBlue;
     }
-    return customColor2;
+    return blueColor;
   }
 }

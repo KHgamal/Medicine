@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import '../pages/home.dart';
 import '../constants.dart';
-import '../pages/welcome_screen.dart';
 
-import 'pages/medicine_details.dart';
 import 'widgets/circular_navigation_bar.dart';
 
 void main() {
@@ -16,38 +13,35 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     MaterialColor themeColor =const  MaterialColor(0xff31275c,
         <int, Color>{
-          50: Color(0xff31275c),
-          100: Color(0xff31275c),
-          200: Color(0xff31275c),
-          300: Color(0xff31275c),
-          400: Color(0xff31275c),
-          500: Color(0xff31275c),
-          600: Color(0xff31275c),
-          700: Color(0xff31275c),
-          800: Color(0xff31275c),
-          900: Color(0xff31275c),
+          50: Color(0xff00afd1),
+          100: Color(0xff00afd1),
+          200: Color(0xff00afd1),
+          300: Color(0xff00afd1),
+          400: Color(0xff00afd1),
+          500: Color(0xff00afd1),
+          600: Color(0xff00afd1),
+          700:Color(0xff00afd1),
+          800:Color(0xff00afd1),
+          900:Color(0xff00afd1),
         },);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: themeColor,
         inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor:const Color(0xffE4E5E8),
-          hintStyle:const TextStyle(fontWeight: FontWeight.bold,fontSize:15),
+          contentPadding:const EdgeInsets.only(right: 8),
+          hintStyle:const TextStyle(fontSize:15,color: Colors.black26,fontWeight: FontWeight.bold),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide( color: Colors.black12),
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide( color: blueColor),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide( color: Colors.black12),
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide( color: blueColor),
           ),
         )
       ),
-      home:const Directionality(
-          textDirection: TextDirection.rtl,
-          child:CircularNavigationBar()),
+      home:const CircularNavigationBar(),
     );
   }
 }

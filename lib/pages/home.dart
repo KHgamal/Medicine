@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import '../constants.dart';
 import 'package:weekday_scroller/weekday_scroller.dart';
 
 import '../widgets/medicine_list_container.dart';
+import 'dart:ui' as ui;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,89 +16,105 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DateTime selectedDay = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
-
     var size = MediaQuery.of(context).size;
-    double bottomNavBarHeight = size.height * 0.1;
-    return SingleChildScrollView(
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [customColor1,customColor2,customColor3, customColor5],
-          ),),
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.22,
-              width: size.width,
-              child: Column(
+    initializeDateFormatting();
+    String date = DateFormat.yMMMMd("ar_QA").format(DateTime.now());
+    return SafeArea(
+      child: Scaffold(
+        body: Directionality(
+          textDirection: ui.TextDirection.rtl,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  color: const Color(0xff70c5e2),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children:const[
-                              Text(
-                              '  تذكيرك اليومي بالدواء',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
+                      Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'تذكيرك اليومي بالدواء',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            /*Image.asset(
-                              'assets/logo.png',
-                              height: size.height * 0.15,
-                            ),*/
-                          ],
-                        ),
-                      ),
-                       SizedBox(
-                        height: size.height*0.02,
+                              Text(
+                                date,
+                                style: TextStyle(
+                                  color: redColor,
+                                  fontSize: 23,
+                                  //fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                       WeekdayScroller(
                         selectedDay: selectedDay,
                         changeDay: (value) => setState(() {
                           selectedDay = value;
                         }),
-                        backgroundColor: customColor1.withOpacity(0),
+                        backgroundColor: Colors.transparent,
                         enableWeeknumberText: false,
-                        weekdayTextColor:Colors.white,
-                        digitsColor:Colors.white70,
-                        selectedDigitColor:customColor1,
-                        selectedBackgroundColor:Colors.white,
+                        weekdays: const [
+                          "الاثنين",
+                          'الثلاثاء',
+                          'الاربعاء',
+                          'الخميس',
+                          'الجمعة',
+                          'السبت',
+                          'الاحد',
+                        ],
+                        weekdayTextColor: Colors.white70,
+                        digitsColor: Colors.white70,
+                        selectedDigitColor: blueColor,
+                        selectedBackgroundColor: Colors.white,
                       ),
                     ],
                   ),
                 ),
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: bottomNavBarHeight,
-                right: 12,
-                left: 12,
-              ),
-              child: SizedBox(
-                height: size.height * 0.65,
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return MedicineListContainer(
-                      size: size,
-                      image: imagesList[index],
-                      name: name[index],
-                      nextDose: nextDose[index],
-                    );
-                  },
-                  itemCount: imagesList.length,
+                SingleChildScrollView(
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.all(12),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: MedicineListContainer(
+                          size: size,
+                          image: details[index]['imagesList'],
+                          name: details[index]['name'],
+                          nextDose: details[index]['nextDose'],
+                          onPressed: (context) => setState(() {
+                            details.removeAt(index);
+                          }),
+                          index: index,
+                          concentration: details[index]['concentration'],
+                          firstDose: details[index]['first dose'],
+                          secondDose: details[index]['second dose'],
+                          doseContainerColor: blueColor,
+                          doseFontColor: Colors.white,
+                        ),
+                      );
+                    },
+                    itemCount: details.length,
+                  ),
                 ),
-              ),
-
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

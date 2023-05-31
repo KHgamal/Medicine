@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
+import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
+import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
 import '../constants.dart';
 
+import '../pages/add_medicine.dart';
 import '../pages/home.dart';
-import '../pages/medicines.dart';
+import '../pages/all_medicines.dart';
 import '../pages/notifications.dart';
-import 'bottom_sheet.dart';
 
 
 class CircularNavigationBar extends StatefulWidget {
@@ -19,57 +20,115 @@ class CircularNavigationBar extends StatefulWidget {
 class _CircularNavigationBarState extends State<CircularNavigationBar> {
   int selectedPos = 0;
   List<TabItem> tabItems = List.of([
-    TabItem(Icons.home, "رئيسيه", customColor1,
-        labelStyle: const TextStyle(fontWeight: FontWeight.normal)),
-    TabItem(Icons.list, "دوائي", customColor1, circleStrokeColor: Colors.white),
-    TabItem(Icons.notifications, "الأشعارات", customColor1),
+    TabItem(Icons.home, "رئيسيه", customColor1,labelStyle: const TextStyle(fontSize: 15)),
+    TabItem(Icons.add, "إضافة", customColor1,labelStyle: const TextStyle(fontSize: 15)),
+    TabItem(Icons.list, "دوائي", customColor1,labelStyle: const TextStyle(fontSize: 15)),
+    TabItem(Icons.notifications, "الأشعارات",customColor1,labelStyle: const TextStyle(fontSize: 15)),
   ]);
   List<Widget> screens = [
     const HomePage(),
+    const AddMedicine(),
     const MedicinesPage(),
     const NotificationsPage(),
   ];
-  late CircularBottomNavigationController _navigationController;
+  final _controller = PageController();
+  /*late CircularBottomNavigationController _navigationController;
   @override
   void initState() {
     super.initState();
     _navigationController = CircularBottomNavigationController(selectedPos);
+  }*/
+  
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    double bottomNavBarHeight = size.height * 0.1;
-    return SafeArea(
-      child: Scaffold(
-        body: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            screens[selectedPos],
-            CircularBottomNavigation(
-              tabItems,
-              controller: _navigationController,
-              selectedPos: selectedPos,
-              barHeight: bottomNavBarHeight,
-              barBackgroundColor: Colors.white,
-              backgroundBoxShadow: const <BoxShadow>[
-                BoxShadow(color: Colors.black45, blurRadius: 10.0),
-              ],
-              animationDuration: const Duration(milliseconds: 300),
-              selectedCallback: (int? selectedPos) {
-                setState(() {
-                  this.selectedPos = selectedPos ?? 0;
-                });
-              },
-            ),
+    //var size = MediaQuery.of(context).size;
+    //double bottomNavBarHeight = size.height * 0.1;
+    return Scaffold(
+      body:SafeArea(
+        child: PageView(
+          controller: _controller,
+          children: const [
+          HomePage(),
+          AddMedicine(),
+          MedicinesPage(),
+          NotificationsPage(),
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endTop ,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: FloatingActionButton.small(onPressed: ()=>modalBottomSheet(context),child: Icon(Icons.add),backgroundColor: Colors.white60,foregroundColor: customColor2,),
-        ),
       ),
+      extendBody: true,
+      bottomNavigationBar: RollingBottomBar(
+
+        controller: _controller,
+        items: const [
+          RollingBottomBarItem(Icons.home, label: "رئيسيه"),
+          RollingBottomBarItem(Icons.add, label: "إضافة"),
+          RollingBottomBarItem(Icons.list, label: "دوائي"),
+          RollingBottomBarItem(Icons.notifications, label: "الأشعارات"),
+        ],
+        flat: true,
+        color:blueColor ,
+        itemColor: Colors.white,
+        activeItemColor:Colors.white,
+        enableIconRotation: true,
+        onTap: (index) {
+          _controller.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeOut,
+          );
+        },
+      ),
+      /* Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          SafeArea(child: screens[selectedPos]),
+          Align(
+              alignment: Alignment.bottomCenter,
+              child:CircularBottomNavigation(
+                tabItems,
+                controller: _navigationController,
+                selectedPos: selectedPos,
+                barHeight: bottomNavBarHeight,
+                barBackgroundColor: Colors.white,
+                backgroundBoxShadow: const <BoxShadow>[
+                  BoxShadow(color: Colors.black45, blurRadius: 10.0),
+                ],
+                animationDuration: const Duration(milliseconds: 300),
+                selectedCallback: (int? selectedPos) {
+                  setState(() {
+                    this.selectedPos = selectedPos ?? 0;
+                  });
+                },
+              ), ),
+          /*SizedBox(
+            height: double.infinity,
+              child: screens[selectedPos]),*/
+         /* CircularBottomNavigation(
+            tabItems,
+            controller: _navigationController,
+            selectedPos: selectedPos,
+            barHeight: bottomNavBarHeight,
+            barBackgroundColor: Colors.white,
+            backgroundBoxShadow: const <BoxShadow>[
+              BoxShadow(color: Colors.black45, blurRadius: 10.0),
+            ],
+            animationDuration: const Duration(milliseconds: 300),
+            selectedCallback: (int? selectedPos) {
+              setState(() {
+                this.selectedPos = selectedPos ?? 0;
+              });
+            },
+          ),*/
+        ],
+
+      ),*/
     );
   }
 }
